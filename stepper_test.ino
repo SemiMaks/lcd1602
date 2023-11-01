@@ -16,24 +16,26 @@ int dl = 5; // время задержки между импульсами
 
 void setup() {
     lcd.init();
-    lcd.backlight();    
+    lcd.backlight();  
+      
     pinMode(in1, OUTPUT);
     pinMode(in2, OUTPUT);
     pinMode(in3, OUTPUT);
     pinMode(in4, OUTPUT);
+
     lcd.print("Test motora:");
     lcd.setCursor(0,1);
     lcd.print("Zapusk cikla");
     delay(500);    
     tone(piezo, 1000, 200);
     delay(1500);
+    
     lcd.clear();
     lcd.print("_1000 chagov_");
 }
 
 void loop() {      
-    while (counter<1000){
-      
+    while (counter<1000){      
       digitalWrite(in1, HIGH); 
       digitalWrite(in2, LOW); 
       digitalWrite(in3, LOW); 
@@ -59,20 +61,16 @@ void loop() {
       delay(dl);
       counter++;
     }
-    while (counter==1000){
-      lcd.clear();
-      lcd.print("1000 -- OK!");
-      delay(1000);
-      lcd.clear();
-      lcd.print("END");
-      delay(1000);
-      lcd.clear();
-      lcd.print("BY");
-      delay(2000);
-      lcd.clear();
-      lcd.noBacklight();
-      counter+=1;
-    }
     
-
-}
+    lcd.clear();
+    lcd.print("1000 -- OK!");
+    delay(1000);
+    lcd.clear();
+    lcd.print("END");
+    delay(1000);
+    lcd.clear();
+    lcd.print("BY");
+    delay(2000);
+    lcd.clear();
+    lcd.noBacklight();
+  }
