@@ -15,9 +15,10 @@ int counter = 0;
 int dl = 5; // время задержки между импульсами
 
 void setup() {
+    Serial.begin(9600);
     lcd.init();
     lcd.backlight();  
-      
+
     pinMode(in1, OUTPUT);
     pinMode(in2, OUTPUT);
     pinMode(in3, OUTPUT);
@@ -35,7 +36,8 @@ void setup() {
 }
 
 void loop() {      
-    while (counter<1000){      
+    while (counter<1000){   
+      Serial.println(counter);
       digitalWrite(in1, HIGH); 
       digitalWrite(in2, LOW); 
       digitalWrite(in3, LOW); 
@@ -60,17 +62,24 @@ void loop() {
       digitalWrite(in4, HIGH);
       delay(dl);
       counter++;
+      Serial.println(counter);
     }
     
-    lcd.clear();
-    lcd.print("1000 -- OK!");
-    delay(1000);
-    lcd.clear();
-    lcd.print("END");
-    delay(1000);
-    lcd.clear();
-    lcd.print("BY");
-    delay(2000);
-    lcd.clear();
-    lcd.noBacklight();
+    while(counter<1002){
+      lcd.clear();
+      lcd.print("1000 -- OK!");
+      delay(1000);
+      lcd.clear();
+      lcd.print("END");
+      delay(1000);
+      lcd.clear();
+      lcd.print("BY");
+      delay(2000);
+      lcd.clear();
+      lcd.noBacklight();
+      tone(piezo, 2000, 200);
+      delay(1500);
+      counter++;
+    }    
+    
   }
